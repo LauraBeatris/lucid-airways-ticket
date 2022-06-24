@@ -12,7 +12,7 @@
 
 
 <p align="center">
-   <a href="https://lucid-airways-ticket">Go check it out 🎉</a>
+   <a href="https://lucidairwaysticket.com">Go check it out 🎉</a>
 </p>
 
 ---
@@ -40,7 +40,7 @@ Define the environment variables by creating a .env.local file similar to [.env.
 
 **Question:** What are the technologies used in this project?
 
-**Answer:** [Next.js](https://nextjs.org/), [Tailwind UI](https://tailwindui.com/) and [Upstash](https://upstash.com/).
+**Answer:** [Next.js](https://nextjs.org/), [Tailwind UI](https://tailwindui.com/), [Upstash](https://upstash.com/) and [Puppeteer](https://github.com/puppeteer/puppeteer).
 
 **Question** Why Next.js instead of other frameworks of React out there?
 
