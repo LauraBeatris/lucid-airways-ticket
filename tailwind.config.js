@@ -10,13 +10,19 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans]
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        'bookmania-regular': ['Bookmania-Regular', ...defaultTheme.fontFamily.serif],
+        'bookmania-black': ['Bookmania-Black', ...defaultTheme.fontFamily.serif]
       },
       backgroundImage: {
         clouds: "url('/images/background-clouds.jpg')"
       },
       backgroundSize: {
         '100%': '100%'
+      },
+      minHeight: {
+        // Subtracts the header height
+        'main-content': 'calc(100vh - 316px)'
       }
     }
   },
