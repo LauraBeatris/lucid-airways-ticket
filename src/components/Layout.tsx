@@ -9,8 +9,8 @@ type LayoutProps = {
 
 export function Layout ({ children, headerClassName, headerContent }: LayoutProps) {
   return (
-    <div className='h-screen w-screen bg-repeat-y bg-clouds bg-100% px-5 pt-6'>
-      <header className={clsx('flex w-full justify-center items-center', headerClassName)}>
+    <div className='h-screen w-screen bg-repeat-y bg-clouds bg-100% px-5  flex flex-col justify-center'>
+      <header className={clsx('mt-auto flex w-full justify-center items-center container-md mx-auto', headerClassName)}>
         <div className='flex flex-col justify-center items-center'>
           <div className='relative h-24 w-32'>
             <Image src='/images/logo.png' layout='fill' alt='Tate McRae Logo' />
@@ -24,9 +24,23 @@ export function Layout ({ children, headerClassName, headerContent }: LayoutProp
         {headerContent}
       </header>
 
-      <main className='min-h-main-content'>
+      <main className='container-sm mx-auto'>
         {children}
       </main>
+
+      <footer className='mt-auto pb-10 text-center font-bookmania-black'>
+        <p>
+          website developed by {' '}
+          <a
+            rel='noopener noreferrer'
+            href='https://www.instagram.com/lauriebeatris/'
+            target='_blank'
+            className='underline'
+          >
+            @lauriebeatris
+          </a>
+        </p>
+      </footer>
     </div>
   )
 }
