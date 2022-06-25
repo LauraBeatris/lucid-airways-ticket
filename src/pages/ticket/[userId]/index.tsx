@@ -23,6 +23,8 @@ type TicketDetailsProps = {
   user: UserData
 }
 
+const resetCopiedStateMilliseconds = 1500
+
 export default function TicketDetails ({ user }: TicketDetailsProps) {
   const [isCopied, setIsCopied] = useState(false)
 
@@ -30,10 +32,12 @@ export default function TicketDetails ({ user }: TicketDetailsProps) {
     setIsCopied(true)
     setTimeout(() => {
       setIsCopied(false)
-    }, 1500)
+    }, resetCopiedStateMilliseconds)
   }
 
   const shareLink = `${process.env.NEXT_PUBLIC_APP_URL}/ticket/${user.id}/share`
+  // eslint-disable-next-line no-useless-escape
+  const twitterLink = `https://twitter.com/intent/tweet?text=I\'ve%20just%20departed%20on%20a%20Lucid%20Airways%20flight%20to%20%40tatemcrae%20birthday%20project,%20organized%20by%20her%20fans%20%F0%9F%9B%A9%EF%B8%8F%0A%0AJoin%20us!%20Don\'t%20forget%20to%20be%20yourself%20and%20feel%20the%20music%20%F0%9F%8E%B5%F0%9F%92%9D%0A%0Ahttps%3A//${process.env.NEXT_PUBLIC_APP_URL?.replace('https://', '')}/ticket/LauraBeatris/share%20`
 
   return (
     <Layout headerText="you're ready to fly to tate's birthday!">
@@ -64,7 +68,12 @@ export default function TicketDetails ({ user }: TicketDetailsProps) {
         </ul>
 
         <div className='flex w-full justify-center gap-2 mt-3'>
-          <a className='bg-ocean focus:border-white focus:border-1 text-white font-semibold p-2 rounded-lg flex flex-row justify-center items-center px-2'>
+          <a
+            href={twitterLink}
+            rel='noopener noreferrer'
+            target='_blank'
+            className='bg-ocean focus:border-white focus:border-1 text-white font-semibold p-2 rounded-lg flex flex-row justify-center items-center px-2'
+          >
             <TwitterIcon className='fill-white' />
           </a>
 
