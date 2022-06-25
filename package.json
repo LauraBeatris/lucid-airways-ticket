@@ -12,6 +12,8 @@
     "lint": "run-p lint:*"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^0.1.7",
+    "@radix-ui/react-select": "^0.1.1",
     "autoprefixer": "^10.4.7",
     "clsx": "^1.1.1",
     "next": "12.1.6",
