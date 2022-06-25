@@ -2,14 +2,21 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Image from 'next/image'
 
+import { useState } from 'react'
+
 import { TicketIcon } from 'components/Icons'
 
 import { CountrySelect, Input, Label } from './Form'
 
-function DialogTrigger () {
+type DialogTriggerProps = {
+  onClick: () => void;
+}
+
+function DialogTrigger ({ onClick }: DialogTriggerProps) {
   return (
     <div className='mt-4 flex justify-center'>
       <Dialog.Trigger
+        onClick={onClick}
         className='bg-ocean focus:border-white focus:border-1 text-white font-semibold p-2 rounded-lg flex flex-row justify-center items-center px-4'
       >
         <div className='relative mr-2'>
@@ -27,31 +34,53 @@ type FormValues = {
 };
 
 export function GuaranteeTicketDialog () {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [countryValue, setCountryValue] = useState('Brazil')
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
     mode: 'all'
   })
 
-  // TODO - Validate country name as well
-  const isValid = !errors.name
+  const closeDialog = () => {
+    setIsDialogOpen(false)
+  }
 
+  const openDialog = () => {
+    setIsDialogOpen(true)
+  }
+
+  const handleCountryValueChange = (value: string) => {
+    setCountryValue(value)
+  }
+
+  const isValid = !errors.name
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     if (!isValid) return
 
     // TODO - Call API with data
     // eslint-disable-next-line no-console
-    console.log({ data })
+    console.log({ data, countryValue })
   }
 
   return (
-    <Dialog.Root>
-      <DialogTrigger />
+    <Dialog.Root open={isDialogOpen}>
+      <DialogTrigger onClick={openDialog} />
 
       <Dialog.Portal>
         <Dialog.Overlay className='fixed inset-0 bg-black/75' />
-        <Dialog.Content className='bg-white px-6 md:px-6 py-6 md:py-10 rounded max-w-md w-full fixed top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4'>
+        <Dialog.Content
+          className='bg-white px-6 md:px-6 py-6 md:py-10 rounded max-w-md w-full fixed top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4'
+          onEscapeKeyDown={closeDialog}
+          onInteractOutside={closeDialog}
+          onPointerDownOutside={closeDialog}
+        >
           <Dialog.Title className='text-xl font-medium font-bookmania-black text-indigo-800'>Ticket Details</Dialog.Title>
-          <Dialog.Description className='text-gray-600'>Enter the data for your Lucid Airways journey.</Dialog.Description>
-          <Dialog.Close className='absolute top-6 right-6 hover:brightness-75'>
+          <Dialog.Description className='text-gray-600'>
+            Enter the data for your Lucid Airways journey.
+          </Dialog.Description>
+          <Dialog.Close
+            onClick={closeDialog}
+            className='absolute top-6 right-6 hover:brightness-75'
+          >
             <Image src='/images/icons/close.svg' width={24} height={24} alt='Close Icon' />
           </Dialog.Close>
 
@@ -74,10 +103,12 @@ export function GuaranteeTicketDialog () {
                 text='Country'
                 htmlFor='country'
               />
-              <CountrySelect />
+              <CountrySelect onValueChange={handleCountryValueChange} />
             </fieldset>
             <div className='flex w-full mt-5 justify-between'>
-              <p className='text-red-400'>{errors.name?.type === 'required' && 'First name is required'}</p>
+              <p className='text-red-400'>
+                {errors.name?.type === 'required' && 'Name is required'}
+              </p>
 
               <button
                 type='submit'

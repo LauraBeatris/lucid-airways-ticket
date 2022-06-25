@@ -256,9 +256,13 @@ const countryList = [
   'Åland Islands'
 ]
 
-export function CountrySelect () {
+type CountrySelectProps = {
+  onValueChange?: (value: string) => void;
+}
+
+export function CountrySelect ({ onValueChange }: CountrySelectProps) {
   return (
-    <Select.Root defaultValue='Brazil'>
+    <Select.Root defaultValue='Brazil' onValueChange={onValueChange}>
       <Select.Trigger
         aria-label='Country'
         className='flex-1 inline-flex gap-2 items-center justify-between rounded-md text-md text-indigo-800 shadow-sm border-indigo-800 border shadow-indigo-800/40 px-3 h-9 hover:bg-gray-50'
