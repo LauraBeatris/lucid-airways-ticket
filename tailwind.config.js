@@ -20,15 +20,11 @@ module.exports = {
       backgroundSize: {
         '100%': '100%'
       },
-      minHeight: {
-        // Subtracts the header height
-        'main-content': 'calc(100vh - 316px)'
-      },
       maxWidth: {
         ticket: '952px'
       },
       colors: {
-        button: '#161A59'
+        ocean: '#161A59'
       }
     }
   },
