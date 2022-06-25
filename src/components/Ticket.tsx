@@ -1,11 +1,14 @@
 import React from 'react'
 import clsx from 'clsx'
 
+import { UserData } from 'lib/database'
+
 type TicketProps = {
+  user?: UserData;
   containerClassName?: string;
  }
 
-export function Ticket ({ containerClassName }: TicketProps) {
+export function Ticket ({ user, containerClassName }: TicketProps) {
   return (
     <div className={clsx('relative mx-auto max-w-ticket', containerClassName)}>
       <svg
@@ -321,7 +324,7 @@ export function Ticket ({ containerClassName }: TicketProps) {
           letterSpacing='0em'
         >
           <tspan x='623' y='89.318'>
-            Your Name
+            {user?.name ?? 'Your Name'}
           </tspan>
         </text>
         <text
@@ -332,7 +335,7 @@ export function Ticket ({ containerClassName }: TicketProps) {
           letterSpacing='0em'
         >
           <tspan x='623' y='143.318'>
-            Your Country
+            {user?.country ?? 'Your Country'}
           </tspan>
         </text>
         <text
@@ -343,7 +346,7 @@ export function Ticket ({ containerClassName }: TicketProps) {
           letterSpacing='0em'
         >
           <tspan x='105' y='90.591'>
-            Your Country
+            {user?.country ?? 'Your Country'}
           </tspan>
         </text>
         <text

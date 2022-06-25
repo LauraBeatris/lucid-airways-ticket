@@ -2,11 +2,13 @@ import { Redis } from '@upstash/redis'
 import { nanoid } from 'nanoid'
 
 const redisConnection = new Redis({
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   url: process.env.UPSTASH_REDIS_REST_URL,
   token: process.env.UPSTASH_REDIS_REST_TOKEN
 })
 
-type UserData = {
+export type UserData = {
   name: string;
   country: string;
 }
@@ -29,12 +31,12 @@ export async function createUser (data: UserData) {
   return userId
 }
 
-// export async function getUser (userId: string) {
-//   const userRaw = await redisConnection.hget<UserData>('users', userId)
+export async function getUser (userId: string) {
+  const userRaw = await redisConnection.hget<UserData>('users', userId)
 
-//   if (!userRaw) {
-//     return null
-//   }
+  if (!userRaw) {
+    return null
+  }
 
-//   return userRaw
-// }
+  return userRaw
+}
