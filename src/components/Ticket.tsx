@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 
 type TicketProps = {
-  containerClassName: string;
+  containerClassName?: string;
  }
 
 export function Ticket ({ containerClassName }: TicketProps) {

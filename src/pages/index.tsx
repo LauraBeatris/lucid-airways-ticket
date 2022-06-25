@@ -3,7 +3,7 @@ import clsx from 'clsx'
 
 import { Layout } from 'components/Layout'
 import { Ticket } from 'components/Ticket'
-import { TicketIcon } from 'components/Icons'
+import { GuaranteeTicketDialog } from 'components/Dialogs'
 
 type IntroductionHeaderProps = {
   className: string;
@@ -23,22 +23,6 @@ function IntroductionHeader ({ className }: IntroductionHeaderProps) {
   )
 }
 
-function ModalButton () {
-  return (
-    <div className='mt-4 flex justify-center'>
-      <button
-        className='bg-button text-white font-semibold p-2 rounded-lg flex flex-row justify-center items-center px-4'
-      >
-        <div className='relative mr-2'>
-          <TicketIcon className='fill-white' />
-        </div>
-
-        Click to guarantee your ticket
-      </button>
-    </div>
-  )
-}
-
 const Home: NextPage = () => {
   return (
     <Layout
@@ -46,7 +30,7 @@ const Home: NextPage = () => {
       headerContent={<IntroductionHeader className='text-center md:text-left max-w-md mt-2' />}
     >
       <>
-        <ModalButton />
+        <GuaranteeTicketDialog />
 
         <Ticket containerClassName='mt-5' />
       </>

@@ -35,7 +35,7 @@ export function Layout ({ children, headerClassName, headerContent }: LayoutProp
             rel='noopener noreferrer'
             href='https://www.instagram.com/lauriebeatris/'
             target='_blank'
-            className='underline text-button'
+            className='underline text-ocean'
           >
             @lauriebeatris
           </a>
