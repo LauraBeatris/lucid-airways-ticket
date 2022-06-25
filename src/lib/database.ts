@@ -9,6 +9,7 @@ const redisConnection = new Redis({
 })
 
 export type UserData = {
+  id: string;
   name: string;
   country: string;
 }
@@ -23,10 +24,10 @@ function transformNameToId (name: string) {
   return `${nameSlug}-${nanoid()}`
 }
 
-export async function createUser (data: UserData) {
+export async function createUser (data: Omit<UserData, 'id'>) {
   const userId = transformNameToId(data.name)
 
-  await redisConnection.hsetnx('users', userId, data)
+  await redisConnection.hsetnx('users', userId, { id: userId, ...data })
 
   return userId
 }
