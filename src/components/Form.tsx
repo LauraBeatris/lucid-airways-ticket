@@ -1,4 +1,6 @@
 import * as Select from '@radix-ui/react-select'
+import { Ref, forwardRef } from 'react'
+import { ChangeHandler } from 'react-hook-form'
 
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from './Icons'
 
@@ -313,15 +315,23 @@ export function Label ({ htmlFor, text }: LabelProps) {
 
 type InputProps = {
   id: string;
-  placeholder: string
+  onBlur: ChangeHandler;
+  onChange: ChangeHandler;
+  placeholder: string;
 }
 
-export function Input ({ id, placeholder }: InputProps) {
+export const Input = forwardRef(function Input ({
+  id, placeholder, onChange, onBlur, ...rest
+}: InputProps, ref: Ref<HTMLInputElement>) {
   return (
     <input
+      {...rest}
       id={id}
+      ref={ref}
+      onBlur={onBlur}
+      onChange={onChange}
       placeholder={placeholder}
       className='flex-1 rounded-md w-full inline-flex px-3 h-9 shadow-sm border-indigo-800 border shadow-indigo-800/40 text-indigo-800 placeholder:text-indigo-600/50'
     />
   )
-}
+})
