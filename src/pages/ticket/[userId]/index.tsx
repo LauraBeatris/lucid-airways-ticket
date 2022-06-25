@@ -1,10 +1,10 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { Layout } from 'components/Layout'
 import { Ticket } from 'components/Ticket'
-import { getUser, UserData } from 'lib/database'
+import { getUser } from 'lib/database'
 import { CheckIcon, CopyIcon, TwitterIcon, WhatsappIcon } from 'components/Icons'
 
 const mapTwitterUsernameToUrl = {
@@ -19,13 +19,9 @@ const mapTwitterUsernameToUrl = {
   upmcraebr: 'https://twitter.com/upmcraebr'
 }
 
-type TicketDetailsProps = {
-  user: UserData
-}
-
 const resetCopiedStateMilliseconds = 1500
 
-export default function TicketDetails ({ user }: TicketDetailsProps) {
+export default function TicketDetails ({ user }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [isCopied, setIsCopied] = useState(false)
 
   const handleCopyClick = () => {

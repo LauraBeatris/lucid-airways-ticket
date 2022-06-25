@@ -129,3 +129,18 @@ export function WhatsappIcon (props: IconProps) {
     </svg>
   )
 }
+
+export function AirplaneIcon (props: IconProps) {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width='24'
+      height='24'
+      fillRule='evenodd'
+      clipRule='evenodd'
+      {...props}
+    >
+      <path d='M20 18v2H0v-2h20zM.011 11.574l2.624-1.5L7.4 11.889s9.197-5.519 11.773-7.038c2.226-1.312 4.268-.853 4.647-.216.448.753.131 2.366-2.576 4.09-2.166 1.38-9.233 5.855-9.233 5.855-4.969 2.708-7.565.657-7.565.657L.011 11.574zm5.587-6.621L3 6.453l6.252 3.173 5.388-3.227-9.042-1.446z' />
+    </svg>
+  )
+}
