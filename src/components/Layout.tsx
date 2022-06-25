@@ -3,11 +3,17 @@ import clsx from 'clsx'
 
 type LayoutProps = {
   children: JSX.Element,
-  headerClassName?: string;
+  headerText: string;
   headerContent?: JSX.Element
+  headerClassName?: string;
 }
 
-export function Layout ({ children, headerClassName, headerContent }: LayoutProps) {
+export function Layout ({
+  children,
+  headerText,
+  headerContent,
+  headerClassName
+}: LayoutProps) {
   return (
     <div className='h-screen w-screen bg-repeat-y bg-clouds bg-100% px-5  flex flex-col justify-center'>
       <header className={clsx('mt-auto flex w-full justify-center items-center container-md mx-auto', headerClassName)}>
@@ -17,7 +23,7 @@ export function Layout ({ children, headerClassName, headerContent }: LayoutProp
           </div>
 
           <h1 className='font-bookmania-black text-3xl text-center max-w-xs'>
-            lucid airways now boarding to tate's birthday
+            {headerText}
           </h1>
         </div>
 

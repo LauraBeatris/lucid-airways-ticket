@@ -1,10 +1,11 @@
+import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import axios from 'axios'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-import { useState } from 'react'
-
-import { TicketIcon } from 'components/Icons'
+import { SpinnerIcon, TicketIcon } from 'components/Icons'
 
 import { CountrySelect, Input, Label } from './Form'
 
@@ -35,10 +36,15 @@ type FormValues = {
 
 export function GuaranteeTicketDialog () {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [countryValue, setCountryValue] = useState('Brazil')
+  const [country, setCountry] = useState('Brazil')
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
     mode: 'all'
   })
+
+  const [apiError, setApiError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const router = useRouter()
 
   const closeDialog = () => {
     setIsDialogOpen(false)
@@ -49,16 +55,20 @@ export function GuaranteeTicketDialog () {
   }
 
   const handleCountryValueChange = (value: string) => {
-    setCountryValue(value)
+    setCountry(value)
   }
 
-  const isValid = !errors.name
+  const isValid = !errors.name && !isLoading
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     if (!isValid) return
 
-    // TODO - Call API with data
-    // eslint-disable-next-line no-console
-    console.log({ data, countryValue })
+    setIsLoading(true)
+    const { name } = data
+
+    axios.post('/api/user', { name, country })
+      .then((res) => router.push(`/ticket/${res.data.userId}`))
+      .catch((err) => setApiError(err))
+      .finally(() => setIsLoading(false))
   }
 
   return (
@@ -110,11 +120,17 @@ export function GuaranteeTicketDialog () {
                 {errors.name?.type === 'required' && 'Name is required'}
               </p>
 
+              <p className='text-red-400'>
+                {apiError && 'Error while creating ticket, try again later'}
+              </p>
+
               <button
                 type='submit'
                 disabled={!isValid}
                 className='disabled:brightness-50 disabled:cursor-not-allowed inline-flex items-center rounded-md h-8 px-3 leading-none bg-indigo-800 text-indigo-100'
               >
+                {isLoading && <SpinnerIcon />}
+
                 Ready to fly
               </button>
             </div>

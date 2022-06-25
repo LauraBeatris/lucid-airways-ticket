@@ -26,6 +26,7 @@ function IntroductionHeader ({ className }: IntroductionHeaderProps) {
 const Home: NextPage = () => {
   return (
     <Layout
+      headerText="lucid airways now boarding to tate's birthday"
       headerClassName='flex-col md:flex-row'
       headerContent={<IntroductionHeader className='text-center md:text-left max-w-md mt-2' />}
     >
