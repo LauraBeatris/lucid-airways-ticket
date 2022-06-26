@@ -1,5 +1,7 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
+import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 
 import { getUser } from 'lib/database'
 import { AirplaneIcon } from 'components/Icons'
@@ -25,21 +27,55 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 export default function ShareTicket ({ user }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const headerText = `Join ${user.name} on tate's birthday flight`
+  const ogTitle = `Join ${user.name} on Tate's Birthday Flight | Lucid Airways Ticket`
+  const ogDescription = `Join ${user.name} on Tate's Birthday Flight`
+
+  const shareUrl = `https://${process.env.NEXT_PUBLIC_APP_URL}.com/ticket/${user.id}/share`
+  const imageUrl = `https://${process.env.NEXT_PUBLIC_APP_URL}/ticket.png?userId=${user.id}`
 
   return (
-    <Layout headerText={headerText}>
-      <div className='w-full flex flex-col justify-center items-center'>
+    <>
+      <NextSeo title={ogTitle} />
 
-        <Link href='/'>
-          <a className='gap-1 bg-ocean focus:border-white focus:border-1 text-white font-semibold p-2 rounded-lg flex flex-row justify-center items-center px-4 mt-2'>
-            <AirplaneIcon className='fill-white' />
-            Get your Lucid Airway ticket
-          </a>
-        </Link>
+      <Head>
+        <meta property='og:image' content={imageUrl} />
+        <meta property='og:image:secure_url' content={imageUrl} />
+        <meta name='twitter:image' content={imageUrl} />
+        <meta name='twitter:image:src' content={imageUrl} />
+        <meta name='description' content={ogDescription} />
+        <meta property='og:url' content={shareUrl} />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content={ogTitle} />
+        <meta property='og:description' content={ogDescription} />
+        <meta property='og:locale' content='en_us' />
+        <meta property='og:site_name' content={ogTitle} />
+        <meta property='og:image:alt' content={ogTitle} />
+        <meta property='og:image:type' content='image/png' />
+        <meta property='og:image:width' content='1200' />
+        <meta property='og:image:height' content='630' />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content={ogTitle} />
+        <meta name='twitter:site' content='@tatemcrae' />
+        <meta name='twitter:creator' content='@lauradotjs' />
+        <meta name='twitter:image:alt' content={ogTitle} />
+        <meta name='twitter:image:width' content='1200' />
+        <meta name='twitter:image:height' content='630' />
+        <link rel='canonical' href={shareUrl} />
+        <meta name='robots' content='noindex' />
+      </Head>
 
-        <Ticket user={user} containerClassName='mt-5' />
-      </div>
-    </Layout>
+      <Layout headerText={ogDescription.toLowerCase()}>
+        <div className='w-full flex flex-col justify-center items-center'>
+          <Link href='/'>
+            <a className='gap-1 bg-ocean focus:border-white focus:border-1 text-white font-semibold p-2 rounded-lg flex flex-row justify-center items-center px-4 mt-2'>
+              <AirplaneIcon className='fill-white' />
+              Get your Lucid Airways ticket
+            </a>
+          </Link>
+
+          <Ticket user={user} containerClassName='mt-5' />
+        </div>
+      </Layout>
+    </>
   )
 }
