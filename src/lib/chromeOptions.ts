@@ -15,6 +15,6 @@ export async function getOptions (isDev: boolean) {
     : {
         args: chromium.args,
         executablePath: await chromium.executablePath,
-        headless: chromium.headless
+        headless: true
       }
 }
