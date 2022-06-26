@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { withSentry } from '@sentry/nextjs'
 
 import { createUser } from 'lib/database'
 
-export default async function handler (req: NextApiRequest, res: NextApiResponse) {
+async function handler (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { name, country } = req.body
 
@@ -11,3 +12,5 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     return res.status(200).json({ userId })
   }
 }
+
+export default withSentry(handler)

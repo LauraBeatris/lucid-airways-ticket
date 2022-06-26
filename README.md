@@ -30,6 +30,7 @@
 $ git clone https://github.com/LauraBeatris/lucid-airways-ticket.git
 $ cd lucid-airways-ticket
 $ cp .env.local.example .env.local
+$ cp .env.example .env
 $ yarn
 $ yarn dev
 ```

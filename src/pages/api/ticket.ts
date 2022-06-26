@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { withSentry } from '@sentry/nextjs'
 
 import { getScreenshot } from 'lib/chromium'
 
 const isDev = !process.env.AWS_REGION
 const isHtmlDebug = process.env.OG_HTML_DEBUG === '1'
 
-export default async function handler (req: NextApiRequest, res: NextApiResponse) {
+async function handler (req: NextApiRequest, res: NextApiResponse) {
   try {
     const userId = String(req.query.userId)
 
@@ -39,3 +40,5 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     res.end(`<h1>Internal Error</h1><p>Sorry, there was a problem</p><p>${JSON.stringify(err)}</p>`)
   }
 }
+
+export default withSentry(handler)
