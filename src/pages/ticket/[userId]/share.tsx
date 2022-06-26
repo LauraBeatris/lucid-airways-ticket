@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
-import { NextSeo } from 'next-seo'
 
 import { getUser } from 'lib/database'
 import { AirplaneIcon } from 'components/Icons'
@@ -35,9 +34,8 @@ export default function ShareTicket ({ user }: InferGetStaticPropsType<typeof ge
 
   return (
     <>
-      <NextSeo title={ogTitle} />
-
       <Head>
+        <title>{ogTitle}</title>
         <meta property='og:image' content={imageUrl} />
         <meta property='og:image:secure_url' content={imageUrl} />
         <meta name='twitter:image' content={imageUrl} />
