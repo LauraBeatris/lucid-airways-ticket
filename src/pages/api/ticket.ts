@@ -15,7 +15,7 @@ async function handler (req: NextApiRequest, res: NextApiResponse) {
       throw new Error('User ID is required')
     }
 
-    const ticketImageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/ticket/${userId}/image`
+    const ticketImageUrl = `http://${process.env.NEXT_PUBLIC_APP_URL?.replace('http://', '')}/ticket/${userId}/image`
     Sentry.addBreadcrumb({
       message: `Ticket image URL: ${ticketImageUrl}`,
       level: 'info'
@@ -37,6 +37,7 @@ async function handler (req: NextApiRequest, res: NextApiResponse) {
 
     res.end(file)
   } catch (err) {
+    console.error(err)
     Sentry.captureException(err)
 
     res.statusCode = 500
