@@ -34,7 +34,7 @@ export default function TicketDetails ({ user }: InferGetStaticPropsType<typeof 
 
   const shareLink = `https://${process.env.NEXT_PUBLIC_APP_URL}/ticket/${user.id}/share`
   // eslint-disable-next-line no-useless-escape
-  const twitterLink = `https://twitter.com/intent/tweet?text=I\'ve%20just%20departed%20on%20a%20Lucid%20Airways%20flight%20to%20%40tatemcrae%20birthday%20project,%20organized%20by%20her%20fans%20%F0%9F%9B%A9%EF%B8%8F%0A%0AJoin%20us!%20Don\'t%20forget%20to%20be%20yourself%20and%20feel%20the%20music%20%F0%9F%8E%B5%F0%9F%92%9D%0A%0Ahttps%3A//${process.env.NEXT_PUBLIC_APP_URL?.replace('https://', '')}/ticket/${user.id}/share%20`
+  const twitterLink = `https://twitter.com/intent/tweet?text=I've%20just%20departed%20on%20a%20Lucid%20Airways%20flight%20to%20%40tatemcrae%20birthday%20project,%20organized%20by%20her%20fans%20%F0%9F%9B%A9%EF%B8%8F%0A%0AJoin%20us!%20Don't%20forget%20to%20be%20yourself%20and%20feel%20the%20music%20%23TateBirthdayProject%20%F0%9F%8E%B5%F0%9F%92%9D%0A%0Ahttps%3A//${process.env.NEXT_PUBLIC_APP_URL?.replace('https://', '')}/ticket/${user.id}/share%20%20`
   const whatsappLink = `https://api.whatsapp.com/send?text=I've%20just%20departed%20on%20a%20Lucid%20Airways%20flight%20to%20%40tatemcrae%20birthday%20project%2C%20organized%20by%20her%20fans%20%F0%9F%9B%A9%EF%B8%8F%0A%0AJoin%20us!%20Don't%20forget%20to%20be%20yourself%20and%20feel%20the%20music%20%F0%9F%8E%B5%F0%9F%92%9D%0A%0Ahttps%3A%2F%2F${process.env.NEXT_PUBLIC_APP_URL}%2Fticket%2F${user.id}%2Fshare%20%20`
 
   useEffect(() => {
