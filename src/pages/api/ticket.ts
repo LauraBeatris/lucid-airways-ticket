@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withSentry } from '@sentry/nextjs'
+import * as Sentry from '@sentry/nextjs'
 
 import { getScreenshot } from 'lib/chromium'
 
@@ -32,12 +33,11 @@ async function handler (req: NextApiRequest, res: NextApiResponse) {
 
     res.end(file)
   } catch (err) {
-    // TODO - Send to Sentry
-    console.error(err)
+    Sentry.captureException(err)
 
     res.statusCode = 500
     res.setHeader('Content-Type', 'text/html')
-    res.end(`<h1>Internal Error</h1><p>Sorry, there was a problem</p><p>${JSON.stringify(err)}</p>`)
+    res.end('<h1>Internal Error</h1><p>Sorry, there was a problem</p>')
   }
 }
 
