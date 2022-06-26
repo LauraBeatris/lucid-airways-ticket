@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useEffect, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-
 import { NextSeo } from 'next-seo'
 
 import { Layout } from 'components/Layout'
@@ -40,7 +39,7 @@ export default function TicketDetails ({ user }: InferGetStaticPropsType<typeof 
 
   useEffect(() => {
     // Start generating ticket image for sharing feature
-    fetch(`${process.env.NEXT_PUBLIC_APP_URL}/ticket.png?userId=${user.id}`)
+    fetch(`/ticket.png?userId=${user.id}`)
   }, [user.id])
 
   return (
