@@ -16,6 +16,10 @@ async function handler (req: NextApiRequest, res: NextApiResponse) {
     }
 
     const ticketImageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/ticket/${userId}/image`
+    Sentry.addBreadcrumb({
+      message: `Ticket image URL: ${ticketImageUrl}`,
+      level: 'info'
+    })
 
     if (isHtmlDebug) {
       return res.redirect(ticketImageUrl)
